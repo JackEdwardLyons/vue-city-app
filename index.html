@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>City Search App</title>
+  <link href="https://fonts.googleapis.com/css?family=Rancho" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  
+  
+ <!-- Navigation  -->
+  <nav class="nav has-shadow">
+    <div class="container">
+      <div class="nav-left">
+        <a class="nav-item">
+          <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo">
+        </a>
+        <a class="nav-item is-tab is-hidden-mobile is-active">Home</a>
+        <a class="nav-item is-tab is-hidden-mobile">Features</a>
+        <a class="nav-item is-tab is-hidden-mobile">Pricing</a>
+        <a class="nav-item is-tab is-hidden-mobile">About</a>
+      </div>
+      <span class="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <div class="nav-right nav-menu">
+        <a class="nav-item is-tab is-hidden-tablet is-active">Home</a>
+        <a class="nav-item is-tab is-hidden-tablet">Features</a>
+        <a class="nav-item is-tab is-hidden-tablet">Pricing</a>
+        <a class="nav-item is-tab is-hidden-tablet">About</a>
+        <a class="nav-item is-tab">
+          Log In
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navigtion -->
+  
+  
+  <!-- Main Container  -->
+  <main class="site-content">
+    
+    <!-- Heading and Search -->
+    <div class="columns">
+      <div class="column has-text-centered">
+        <h2 class="" v-cloak>
+          <strong>{{ headline }}</strong>
+        </h2>
+        <div class="">
+            <input class="input control city-search" type="text" 
+                   placeholder="Los Angeles, California"
+                   v-model="citySearch" @keyup="addCity()">
+            <a class="button is-primary control city-search--btn" 
+               @click="addCity()">Search</a>
+        </div>
+      </div>
+    </div>
+    <!-- end Heading and Search -->
+    
+    
+    <!-- Displayed Cities -->
+    <section>
+      <div class="">
+        <div v-show="cities" v-for="(city, index) in filteredCities">
+          <ul class="results">
+            <li class="columns">
+              
+              <!-- City Stats fitst half -->
+              <div class="column" style="border: 1px solid gold;">
+                
+                  <div class="city--stats">
+                    <p>
+                      <strong>City: </strong> {{ city.city }} 
+                    </p>
+                    <p>
+                      <strong>State: </strong> {{ city.state }} 
+                    </p>
+                  </div>
+                
+                  <div class="columns is-mobile">
+                    <div class="column" style="border: 1px solid green;">
+                      Things to do in {{ city.city }}
+                    </div>
+
+                    <div class="column" style="border: 1px solid green;">
+                      Things to do in {{ city.city }}
+                    </div>
+                  </div>
+                
+              </div>
+              <!-- end City Stats fitst half -->
+              
+              
+              <!-- City Stats second half -->
+              <div class="column" style="border: 1px solid gold;">
+                  
+                  <div class="city--stats">
+                    <p>
+                      <strong>Rank: </strong> {{ city.rank }} 
+                    </p>
+                    <p>
+                      <strong>Population: </strong> {{ formattedNumber( city.population ) }} 
+                    </p>
+                  </div>
+                
+                  <div class="columns is-mobile">
+                    <div class="column" style="border: 1px solid green;">
+                      Things to do in {{ city.city }}
+                    </div>
+
+                    <div class="column" style="border: 1px solid green;">
+                      Things to do in {{ city.city }}
+                    </div>
+                  </div>
+                
+              </div>
+              <!-- end City Stats second half -->
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- end Displayed Cities -->
+    
+  </main>
+  <!-- end Main Container  -->
+  
+  
+  <!-- Footer  -->
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          Built By <strong>Jack Lyons</strong> &copy; 2017
+          
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Vue.js  -->
+  <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js'></script>
+  
+  <!-- Lodash and main script  -->
+  <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+  <script src="js/index.js"></script>
+
+</body>
+</html>
