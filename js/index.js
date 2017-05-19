@@ -5,7 +5,8 @@ var app = new Vue({
     headline: `Search a City`,
     citySearch: 'boulder',
     cities: [],
-    relevantCities: []
+    relevantCities: [],
+    showMap: false
     // end data
   },
   methods: {
@@ -47,6 +48,27 @@ var app = new Vue({
     }
     
   } // end computed
+});
+
+
+
+var modal = Vue.component('modal', {
+  template: `
+    <div class="modal is-active">
+      
+      <div class="modal-background" @click="$emit('close')"></div>
+      <div class="modal-content">
+
+        <div class="box">
+
+          Modal Text will go in here. Testing 123
+
+        </div>
+
+      </div>
+      <button class="modal-close" @click="$emit('close')"></button>
+    </div>
+  `
 });
 
 /* TO DO

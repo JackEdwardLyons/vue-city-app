@@ -86,12 +86,12 @@
                 
                   <div class="columns is-mobile has-text-centered">
                     <div class="column" style="border: 1px solid green;">
-                      Top 10 Things to do in {{ city.city }}
+                      <h4>Top 10 Things to do in {{ city.city }}</h4>
                       <img class="city--icon " src="./assets/Wallet.png">
                     </div>
 
                     <div class="column" style="border: 1px solid green;">
-                      Top 10 Restaurants in {{ city.city }}
+                      <h4>Top 10 Restaurants in {{ city.city }}</h4>
                       <img class="city--icon " src="./assets/bowl-food-icon.png">
                     </div>
                   </div>
@@ -114,15 +114,21 @@
                 
                   <div class="columns is-mobile has-text-centered">
                     <div class="column" style="border: 1px solid green;">
-                      Top 10 Bars in {{ city.city }}
+                      <h4>Top 10 Bars in {{ city.city }}</h4>
                       <img class="city--icon " src="./assets/beer.png">
                     </div>
 
                     <div class="column" style="border: 1px solid green;">
-                      Find {{ city.city }} on a map
-                      <img class="city--icon " src="./assets/map-512.png">
+                      <h4>Find {{ city.city }} on a map</h4>
+                      <a @click="showMap = !showMap">
+                         <img class="city--icon " src="./assets/map-512.png">
+                      </a>
                     </div>
                   </div>
+                
+                  <!-- Map Modal -->
+                  <modal v-show="showMap" @close="showMap = !showMap"></modal>
+                  <!-- end Map Modal -->
                 
               </div>
               <!-- end City Stats second half -->
