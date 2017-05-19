@@ -53,20 +53,29 @@ var app = new Vue({
 
 
 var modal = Vue.component('modal', {
+  props: [ 'cityName', 'title' ],
   template: `
     <div class="modal is-active">
-      
       <div class="modal-background" @click="$emit('close')"></div>
-      <div class="modal-content">
+      <div class="modal-card">
+        <header class="modal-card-head">
 
-        <div class="box">
+          <p class="modal-card-title">View {{ title }} on a map</p>
 
-          Modal Text will go in here. Testing 123
+          <button class="delete" @click="$emit('close')"></button>
+        </header>
+        <section class="modal-card-body">
 
-        </div>
+          <!-- Content ... -->
 
+        </section>
+        <footer class="modal-card-foot">
+
+          <a class="button is-success">Save changes</a>
+          <a class="button">Cancel</a>
+
+        </footer>
       </div>
-      <button class="modal-close" @click="$emit('close')"></button>
     </div>
   `
 });

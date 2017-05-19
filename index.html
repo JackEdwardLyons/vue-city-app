@@ -127,9 +127,14 @@
                   </div>
                 
                   <!-- Map Modal -->
-                  <modal v-show="showMap" @close="showMap = !showMap"></modal>
+                  <modal v-show="showMap" 
+                         @close="showMap = !showMap"
+                         :title="city.city">
+                        <!-- bind title to city name in component -->
+                    <p>Modal Text will go in here. Testing 123</p>
+                  </modal>
                   <!-- end Map Modal -->
-                
+                  
               </div>
               <!-- end City Stats second half -->
 
