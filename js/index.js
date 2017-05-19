@@ -53,7 +53,7 @@ var app = new Vue({
 
 
 var modal = Vue.component('modal', {
-  props: [ 'cityName', 'title' ],
+  props: [ 'title' ],
   template: `
     <div class="modal is-active">
       <div class="modal-background" @click="$emit('close')"></div>
@@ -66,7 +66,9 @@ var modal = Vue.component('modal', {
         </header>
         <section class="modal-card-body">
 
-          <!-- Content ... -->
+          <iframe width="100%" height="350" frameborder="0" style="border:0"
+                  src="https://www.google.com/maps/embed/v1/place?q={{title}},United+States&key=AIzaSyBh0g0ArtnfdANIyo-xH8v61n2bxrhMdME">
+          </iframe>
 
         </section>
         <footer class="modal-card-foot">
