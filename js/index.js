@@ -3,7 +3,7 @@ var app = new Vue({
   
   data: {
     headline: `Search a City`,
-    citySearch: 'boulder',
+    citySearch: '',
     cities: [],
     relevantCities: [],
     showMap: false
