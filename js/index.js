@@ -13,9 +13,9 @@ var app = new Vue({
     
     addCity() {
       this.defaultCity = '';
-      if (this.citySearch !== '') {
+      if (this.citySearch !== '' && this.citySearch.length >= 3) {
         this.lookupCity();
-      }
+      } 
     },
     
     lookupCity: _.debounce(function() {
@@ -43,7 +43,8 @@ var app = new Vue({
       if (searched === '') this.cities = []; 
       
       return this.cities.filter((city) => {
-        return city.city.toLowerCase().indexOf( searched.toLowerCase() ) > -1 || city.state.toLowerCase().indexOf( searched.toLowerCase() ) > -1;
+        return city.city.toLowerCase().indexOf( searched.toLowerCase() ) > -1 
+        // || city.state.toLowerCase().indexOf( searched.toLowerCase() ) > -1;
       });
     }
     
