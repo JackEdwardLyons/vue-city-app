@@ -18,7 +18,7 @@ var app = new Vue({
       }
     },
     
-    lookupCity() {
+    lookupCity: _.debounce(function() {
       var cityName = this.citySearch;
       // City data
       const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
@@ -30,7 +30,7 @@ var app = new Vue({
         })
         .catch(err => console.log(err));
       // this.citySearch = '';
-    },
+    }, 400),
     formattedNumber(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ', ');
     }
@@ -66,8 +66,8 @@ var modal = Vue.component('modal', {
         </header>
         <section class="modal-card-body">
 
-          <iframe width="100%" height="350" frameborder="0" style="border:0"
-                  src="https://www.google.com/maps/embed/v1/place?q={{title}},United+States&key=AIzaSyBh0g0ArtnfdANIyo-xH8v61n2bxrhMdME">
+          <iframe width="100%" height="350" frameborder="0" style="border:0" 
+                  :src="iframeUrl">
           </iframe>
 
         </section>
@@ -79,7 +79,12 @@ var modal = Vue.component('modal', {
         </footer>
       </div>
     </div>
-  `
+  `,
+  computed: {
+    iframeUrl: function() {
+      return `https://www.google.com/maps/embed/v1/place?q=${this.title},United+States&key=AIzaSyBh0g0ArtnfdANIyo-xH8v61n2bxrhMdME`;
+    }
+  }
 });
 
 /* TO DO
