@@ -6,7 +6,8 @@ var app = new Vue({
     citySearch: '',
     cities: [],
     relevantCities: [],
-    showMap: false
+    showMap: false,
+    searchFilters: false
     // end data
   },
   methods: {
@@ -62,6 +63,7 @@ var modal = Vue.component('modal', {
         <header class="modal-card-head">
 
           <p class="modal-card-title">View {{ title }} on a map</p>
+          
 
           <button class="delete" @click="$emit('close')"></button>
         </header>
@@ -83,6 +85,7 @@ var modal = Vue.component('modal', {
   `,
   computed: {
     iframeUrl: function() {
+      console.log( this.title );
       return `https://www.google.com/maps/embed/v1/place?q=${this.title},United+States&key=AIzaSyBh0g0ArtnfdANIyo-xH8v61n2bxrhMdME`;
     }
   }
