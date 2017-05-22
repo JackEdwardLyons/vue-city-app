@@ -14,245 +14,247 @@
 </head>
 
 <body>
-  
-  
- <!-- Navigation  -->
-  <nav class="nav has-shadow">
-    <div class="container">
-      <div class="nav-left">
-        <a class="nav-item">
-          <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo">
-        </a>
-        <a class="nav-item is-tab is-hidden-mobile is-active">Home</a>
-        <a class="nav-item is-tab is-hidden-mobile">Features</a>
-        <a class="nav-item is-tab is-hidden-mobile">Pricing</a>
-        <a class="nav-item is-tab is-hidden-mobile">About</a>
+   <!-- Navigation  -->
+    <nav class="nav has-shadow">
+      <div class="container">
+        <div class="nav-left">
+          <a class="nav-item">
+            <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo">
+          </a>
+          <a class="nav-item is-tab is-hidden-mobile is-active">Home</a>
+          <a class="nav-item is-tab is-hidden-mobile">Features</a>
+          <a class="nav-item is-tab is-hidden-mobile">Pricing</a>
+          <a class="nav-item is-tab is-hidden-mobile">About</a>
+        </div>
+        <span class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <div class="nav-right nav-menu">
+          <a class="nav-item is-tab is-hidden-tablet is-active">Home</a>
+          <a class="nav-item is-tab is-hidden-tablet">Features</a>
+          <a class="nav-item is-tab is-hidden-tablet">Pricing</a>
+          <a class="nav-item is-tab is-hidden-tablet">About</a>
+          <a class="nav-item is-tab">
+            Log In
+          </a>
+        </div>
       </div>
-      <span class="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
-      <div class="nav-right nav-menu">
-        <a class="nav-item is-tab is-hidden-tablet is-active">Home</a>
-        <a class="nav-item is-tab is-hidden-tablet">Features</a>
-        <a class="nav-item is-tab is-hidden-tablet">Pricing</a>
-        <a class="nav-item is-tab is-hidden-tablet">About</a>
-        <a class="nav-item is-tab">
-          Log In
-        </a>
-      </div>
-    </div>
-  </nav>
-  <!-- End Navigtion -->
-  
-  
-  <!-- Main Container  -->
-  <main class="site-content">
-    
-    <!-- Heading and Search -->
-    <div class="columns">
-      <div class="column has-text-centered">
-        
-        <h2 v-cloak>
-          <strong>{{ headline }}</strong>
-        </h2>
-        
-        <!-- SEARCHBAR -->
-        <div class="searchbar">
-          
-            <input class="input control city-search" type="text" 
-                   placeholder="Search a city or filter by population etc..."
-                   v-model="citySearch" @keyup="addCity()">
-            
-            <a class="button is-primary control city-search--btn" 
-               @click="addCity()">Search
-            </a>
-          
-            <a class="button is-success" @click="searchFilters = !searchFilters">
-              <i class="fa fa-sliders" aria-hidden="true"></i>
-            </a>
-          
-            <div class="results--filter columns" v-show="searchFilters">
-              <div class="column">
-                <div class="filter-field">
-                  <div class="control">
-                      <p>Search by</p>
+    </nav>
+    <!-- End Navigtion -->
+
+    <!-- Main Container  -->
+    <main id="app" class="site-content">
+
+      <!-- Heading and Search -->
+      <div class="columns">
+        <div class="column has-text-centered">
+
+          <h2 v-cloak>
+            <strong>Search a City</strong>
+          </h2>
+
+          <!-- SEARCHBAR -->
+          <div class="searchbar">
+              <input class="input control city-search" type="text" 
+                placeholder="City Name"
+                v-model="input"
+                @keyup="filterCities()">
+              <!-- Search -->
+              <a class="button is-primary control city-search--btn" 
+                 @click="filterCities()">Search
+              </a>
+              <!-- Filter -->
+              <a class="button is-success" @click="searchFilters = !searchFilters">
+                <i class="fa fa-sliders" aria-hidden="true"></i>
+              </a>
+
+              <div class="results--filter columns" v-show="searchFilters">
+                <div class="column">
+                  <div class="filter-field">
+                    <div class="control">
+                        <p class="bold">Search by</p>
+                        <label class="filter-label">
+                          <input class="filter-label--checkbox" type="radio" name="city-state" /> 
+                          City
+                        </label>
+                        <label class="filter-label">
+                          <input class="filter-label--checkbox" type="radio" name="city-state" /> 
+                          State
+                        </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="filter-field">
+                    <div class="control">
+                      <p class="bold">City Population</p>
                       <label class="filter-label">
-                        <input class="filter-label--checkbox" type="radio" name="city-state" /> 
-                        City
+                        <input class="filter-label--checkbox" type="checkbox" /> 
+                        &lt; 50,000
                       </label>
                       <label class="filter-label">
-                        <input class="filter-label--checkbox" type="radio" name="city-state" /> 
-                        State
+                        <input class="filter-label--checkbox" type="checkbox" /> 
+                        &gt; 50,000 &amp; &lt; 100,000
                       </label>
+                      <label class="filter-label">
+                        <input class="filter-label--checkbox" type="checkbox" /> 
+                        &gt; 100,000 &amp; &lt; 500,000
+                      </label>
+                      <label class="filter-label">
+                        <input class="filter-label--checkbox" type="checkbox" /> 
+                        &gt; 500,000 &amp; &lt; 1,000,000
+                      </label>
+                      <label class="filter-label">
+                        <input class="filter-label--checkbox" type="checkbox" /> 
+                        &nbsp;&nbsp; 1,000,000+
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="filter-field">
+                    <div class="control">
+                      <p class="bold">Rank</p>
+                      <label class="filter-label">
+                        <input class="filter-label--checkbox" type="radio" name="city-rank" /> 
+                        Ascending
+                      </label>
+                      <label class="filter-label">
+                        <input class="filter-label--checkbox" type="radio" name="city-rank" /> 
+                        Descending
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="column">
-                <div class="filter-field">
-                  <div class="control">
-                    <p>City Population</p>
-                    <label class="filter-label">
-                      <input class="filter-label--checkbox" type="checkbox" /> 
-                      &lt; 50,000
-                    </label>
-                    <label class="filter-label">
-                      <input class="filter-label--checkbox" type="checkbox" /> 
-                      &gt; 50,000 &amp; &lt; 100,000
-                    </label>
-                    <label class="filter-label">
-                      <input class="filter-label--checkbox" type="checkbox" /> 
-                      &gt; 100,000 &amp; &lt; 500,000
-                    </label>
-                    <label class="filter-label">
-                      <input class="filter-label--checkbox" type="checkbox" /> 
-                      &gt; 500,000 &amp; &lt; 1,000,000
-                    </label>
-                    <label class="filter-label">
-                      <input class="filter-label--checkbox" type="checkbox" /> 
-                      &nbsp;&nbsp; 1,000,000+
-                    </label>
+
+          </div><!-- END .searchbar -->
+        </div>
+      </div><!-- end Heading and Search -->
+
+
+      <!-- Displayed Cities -->
+      <section>
+        <article class="results" v-for="obj in results">
+          <div class="columns" >
+            <!-- City Stats fitst half -->
+            <div class="column">
+
+                <div class="city--stats">
+                  <p>
+                    <strong>City: </strong> {{ obj.city }} 
+                  </p>
+                  <p>
+                    <strong>State: </strong> {{ obj.state }} 
+                  </p>
+                </div>
+
+                <div class="columns is-mobile has-text-centered">
+                  <div class="column">
+                    <h4>Top 10 Things to do in {{ obj.city }}</h4>
+                    <img class="city--icon " src="./assets/Wallet.png">
+                  </div>
+
+                  <div class="column">
+                    <h4>Top 10 Restaurants in {{ obj.city }}</h4>
+                    <img class="city--icon " src="./assets/bowl-food-icon.png">
                   </div>
                 </div>
-              </div>
-              <div class="column">
-                <div class="filter-field">
-                  <div class="control">
-                    <p>Rank</p>
-                    <label class="filter-label">
-                      <input class="filter-label--checkbox" type="radio" name="city-rank" /> 
-                      Ascending
-                    </label>
-                    <label class="filter-label">
-                      <input class="filter-label--checkbox" type="radio" name="city-rank" /> 
-                      Descending
-                    </label>
-                  </div>
-                </div>
-              </div>
+
             </div>
+            <!-- end City Stats fitst half -->
 
-        </div>
-        <!-- END .searchbar -->
-        
-        
-          
-      </div>
-    </div>
-    <!-- end Heading and Search -->
-    
-    
-    <!-- Displayed Cities -->
-    <section>
-      <div class="">
-        <div v-show="cities" v-for="(city, index) in filteredCities">
-          <ul class="results">
-            <li class="columns">
-              
-              <!-- City Stats fitst half -->
-              <div class="column">
-                
-                  <div class="city--stats">
-                    <p>
-                      <strong>City: </strong> {{ city.city }} 
-                    </p>
-                    <p>
-                      <strong>State: </strong> {{ city.state }} 
-                    </p>
-                  </div>
-                
-                  <div class="columns is-mobile has-text-centered">
-                    <div class="column">
-                      <h4>Top 10 Things to do in {{ city.city }}</h4>
-                      <img class="city--icon " src="./assets/Wallet.png">
-                    </div>
+            <!-- City Stats second half -->
+            <div class="column">
 
-                    <div class="column">
-                      <h4>Top 10 Restaurants in {{ city.city }}</h4>
-                      <img class="city--icon " src="./assets/bowl-food-icon.png">
-                    </div>
-                  </div>
-                
-              </div>
-              <!-- end City Stats fitst half -->
-              
-              
-              <!-- City Stats second half -->
-              <div class="column">
-                  
-                  <div class="city--stats">
-                    <p>
-                      <strong>Rank: </strong> {{ city.rank }} 
-                    </p>
-                    <p>
-                      <strong>Population: </strong> {{ formattedNumber( city.population ) }} 
-                    </p>
-                  </div>
-                
-                  <div class="columns is-mobile has-text-centered">
-                    <div class="column">
-                      <h4>Top 10 Bars in {{ city.city }}</h4>
-                      <img class="city--icon " src="./assets/beer.png">
-                    </div>
+                <div class="city--stats">
+                  <p>
+                    <strong>Rank: </strong> {{ obj.rank }} 
+                  </p>
+                  <p>
+                    <strong>Population: </strong> {{ formattedNumber( obj.population ) }} 
+                  </p>
+                </div>
 
-                    <div class="column">
-                      <h4>Find {{ city.city }} on a map</h4>
-                      <a @click="showMap = !showMap">
-                         <img class="city--icon " src="./assets/map-512.png">
-                      </a>
-                      
-                      <iframe width="100%" height="350" frameborder="0" style="border:0" 
-                            :src="'https://www.google.com/maps/embed/v1/place?q=' + city.city + ',United+States&key=AIzaSyBh0g0ArtnfdANIyo-xH8v61n2bxrhMdME'">
-                      </iframe>
-                      
-                    </div>
+                <!-- City Stats Right Side -->
+                <div class="columns is-mobile has-text-centered">
+                  <div class="column">
+                    <h4>Top 10 Bars in {{ obj.city }}</h4>
+                    <img class="city--icon " src="./assets/beer.png">
                   </div>
-                
-                  <!-- Map Modal -->
-                  
-                  <modal v-show="showMap" 
-                         @close="showMap = !showMap"
-                         :title="city.city">
-                    
-                    
-                    <!-- bind title to city name in component -->
+
+                  <div class="column">
+                    <h4>Find {{ obj.city }} on a map</h4>
+                    <a @click="showMap(obj.city)">
+                       <img class="city--icon " src="./assets/map-512.png">
+                    </a>
+                  </div>
+
+                  <modal v-if="show_modal" 
+                         :city="city"
+                         @close_modal="closeModal">
                   </modal>
-                  <!-- end Map Modal -->
-                  
-              </div>
-              <!-- end City Stats second half -->
+                </div>
 
-            </li>
-          </ul>
+            </div><!-- end City Stats second half -->
+          </div>
+          
+        </article>
+      </section><!-- end Displayed Cities -->
+
+    </main><!-- end Main Container  -->
+  
+  
+    <!-- Modal Template -->
+    <template id="map-modal">
+      <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">View {{ city }} On Map</p>
+            <button class="delete" @click="closeModal"></button>
+          </header>
+          <section class="modal-card-body">
+            <iframe id="iframe"                
+                    frameborder="0"               
+                    :src="map_url"
+                    v-show="loaded">
+            </iframe>
+
+            <div class="load-wrap" v-if="!loaded">
+              <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+            <a class="button is-success">Save changes</a>
+            <a class="button">Cancel</a>
+          </footer>
         </div>
       </div>
-    </section>
-    <!-- end Displayed Cities -->
+    </template><!-- end Modal Template -->
     
-  </main>
-  <!-- end Main Container  -->
-  
-  
-  <!-- Footer  -->
-  <footer class="footer">
-    <div class="container">
-      <div class="content has-text-centered">
-        <p>
-          Built By <strong>Jack Lyons</strong> &copy; 2017
-          
-        </p>
-      </div>
-    </div>
-  </footer>
-  
-  <!-- Vue.js  -->
-  <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js'></script>
-  
-  <!-- Lodash and main script  -->
-  <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
-  <script src="js/index.js"></script>
+    
 
+
+    <!-- Footer  -->
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            Built By <strong>Jack Lyons</strong> &copy; 2017
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Vue.js, Axios, Lodash  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.1/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>  
+
+    <script src="js/index.js"></script>
+    
 </body>
 </html>

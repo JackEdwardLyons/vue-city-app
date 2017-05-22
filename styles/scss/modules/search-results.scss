@@ -38,5 +38,11 @@
 .filter-label {
     display: block;
     margin: .5em 0;
-  
+}
+
+.modal-card-body .load-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
