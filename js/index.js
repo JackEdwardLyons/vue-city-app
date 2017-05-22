@@ -76,9 +76,8 @@ Vue.component('modal', {
             // .onload will only work with es5 as of right now, so we need this
             self = this;
     
-      iframe.src = url;
-      console.log("Source: ", iframe.src);
-      console.log(self);
+      this.map_url = url;
+      
       iframe.onload = function() {
         self.loaded = true;
       }
