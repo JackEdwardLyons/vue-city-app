@@ -46,14 +46,11 @@
 
     <!-- Main Container  -->
     <main id="app" class="site-content">
-
       <!-- Heading and Search -->
       <div class="columns">
         <div class="column has-text-centered">
 
-          <h2 v-cloak>
-            <strong>Search a City</strong>
-          </h2>
+          <h2 class="bold">Search a City</h2>
 
           <!-- SEARCHBAR -->
           <div class="searchbar">
@@ -130,7 +127,7 @@
                 </div>
               </div>
 
-          </div><!-- END .searchbar -->
+          </div><!-- end .searchbar -->
         </div>
       </div><!-- end Heading and Search -->
 
@@ -138,64 +135,58 @@
       <!-- Displayed Cities -->
       <section>
         <article class="results" v-for="obj in results">
+          <!-- City stats -->
           <div class="columns" >
-            <!-- City Stats fitst half -->
             <div class="column">
-
-                <div class="city--stats">
-                  <p><strong>City: </strong> {{ obj.city }} </p>
-                  <p><strong>State: </strong> {{ obj.state }} </p>
-                </div>
-
-                <div class="columns is-mobile has-text-centered">
-                  <div class="column">
-                    <h4>Top 10 Things to do in {{ obj.city }}</h4>
-                    <img class="city--icon " src="./assets/Wallet.png">
-                  </div>
-
-                  <div class="column">
-                    <h4>Top 10 Restaurants in {{ obj.city }}</h4>
-                    <img class="city--icon " src="./assets/bowl-food-icon.png">
-                  </div>
-                </div>
-
+              <div class="city--stats">
+                <p><strong>City: </strong> {{ obj.city }} </p>
+                <p><strong>State: </strong> {{ obj.state }} </p>
+              </div>
             </div>
-            <!-- end City Stats fitst half -->
-
-            <!-- City Stats second half -->
+            
             <div class="column">
-
-                <div class="city--stats">
-                  <p><strong>Rank: </strong> {{ obj.rank }} </p>
-                  <p><strong>Population: </strong> {{ formattedNumber( obj.population ) }} </p>
-                </div>
-
-                <!-- City Stats Right Side -->
-                <div class="columns is-mobile has-text-centered">
-                  <div class="column">
-                    <h4>Top 10 Bars in {{ obj.city }}</h4>
-                    <img class="city--icon " src="./assets/beer.png">
-                  </div>
-
-                  <div class="column">
-                    <h4>Find {{ obj.city }} on a map</h4>
-                    <a @click="showMap(obj.city)">
-                       <img class="city--icon " src="./assets/map-512.png">
-                    </a>
-                  </div>
-
-                  <modal v-if="show_modal" 
-                         :city="city"
-                         @close_modal="closeModal">
-                  </modal>
-                </div>
-
-            </div><!-- end City Stats second half -->
-          </div>
+              <div class="city--stats">
+                <p><strong>Rank: </strong> {{ obj.rank }} </p>
+                <p><strong>Population: </strong> {{ formattedNumber( obj.population ) }} </p>
+              </div>
+            </div>
+          </div> <!-- end City stats -->
           
+          <div class="columns">
+              <!-- Things to do -->
+              <div class="column">
+                <h4>Top 10 Things to do in {{ obj.city }}</h4>
+                <img class="city--icon " src="./assets/Wallet.png">
+              </div>
+
+              <div class="column">
+                <h4>Top 10 Restaurants in {{ obj.city }}</h4>
+                <img class="city--icon " src="./assets/bowl-food-icon.png">
+              </div>
+
+              <div class="column">
+                <h4>Top 10 Bars in {{ obj.city }}</h4>
+                <img class="city--icon " src="./assets/beer.png">
+              </div>
+
+              <div class="column">
+                <h4>Find {{ obj.city }} on a map</h4>
+                <a @click="showMap(obj.city)">
+                   <img class="city--icon " src="./assets/map-512.png">
+                </a>
+              </div>
+          </div><!-- end Things to do -->
+
+          <!-- Modal -->
+          <div class="column">
+            <modal v-if="show_modal" 
+                   :city="city"
+                   @close_modal="closeModal">
+            </modal>
+          </div>
+
         </article>
       </section><!-- end Displayed Cities -->
-
     </main><!-- end Main Container  -->
   
   
@@ -211,7 +202,9 @@
           </header>
           
           <section class="modal-card-body">
-            <iframe id="iframe"                
+            <iframe id="iframe"   
+                    width="100%"
+                    height="400px"
                     frameborder="0"               
                     :src="map_url"
                     v-show="loaded">
@@ -231,8 +224,6 @@
       </div>
     </template><!-- end Modal Template -->
     
-    
-
 
     <!-- Footer  -->
     <footer class="footer">
