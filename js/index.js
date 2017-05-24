@@ -1,13 +1,14 @@
 new Vue({
   el: '#app',
-  
   data: {
       input: '',
       city: '',
       cities: [],
       results: [],
       searchFilters: false,
-      show_modal: false
+      show_modal: false,
+      show_mobile_menu: false,
+      modal_type: ''
   },
   
   methods: {
@@ -39,6 +40,12 @@ new Vue({
     
     showMap(city) {
       this.city = city;
+      this.modal_type = 'map';
+      this.show_modal = true;
+    },
+    
+    login() {
+      this.modal_type = 'login';
       this.show_modal = true;
     },
     
@@ -57,15 +64,26 @@ new Vue({
 });
 
 
+
+
+/* 
+* ----------------
+* MODAL COMPONENT
+* ----------------
+*/
 Vue.component('modal', {
-  template: '#map-modal',
+  template: '#modal',
   
-  props: ['city'],
+  props: ['city', 'type'],
   
   data() {
     return {
       loaded: false,
-      map_url: ''
+      map_url: '',
+      user: {
+        email: '',
+        password: ''
+      }
     }
   },
   
@@ -83,6 +101,11 @@ Vue.component('modal', {
       }
     },
     
+    login() {
+      // handle auth
+      console.log(this.user);
+    },
+    
     closeModal() {
       this.$emit('close_modal');
     }
@@ -93,12 +116,10 @@ Vue.component('modal', {
   }
 });
 
-/* TO DO
 
-- add st, th, nd to numbers on ranking
-- map popup with google embed and co-ordinates
-- top 10 things to do via yelp
-- top 10 places to eat via zomatos */
+
+
+
 
 
 //// Typed JS
