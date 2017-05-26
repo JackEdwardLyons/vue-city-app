@@ -1,0 +1,51 @@
+/* 
+ * Search Results
+ *
+ */
+.searchbar {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.results {
+  background: #fff;
+  border: 1px solid lightgrey;
+  margin: 1em auto;
+  padding: 1em;
+  width: 75%;
+  
+  &--filter {
+    @extend .results;
+  }
+}
+
+.city-search {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.city--icon {
+  max-width: 150px;
+  padding: 1em;
+}
+
+.filter-field {
+  text-align: left;
+}
+
+.filter-label {
+    display: block;
+    margin: .5em 0;
+}
+
+.modal-card-body--load-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.modal-card-title {
+  width: 80%;
+}
